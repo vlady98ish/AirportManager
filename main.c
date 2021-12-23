@@ -78,8 +78,8 @@ int main()
 
 		case EXIT:
 			printf("Bye bye\n");
-                writeAirportManagerToTextFile("airport_authority.txt",&manager);
-//                writeAirlineToBFile("airline.bin",&company);
+                writeAirportManagerToTextFile("",&manager);
+                writeAirlineToBFile("",&company);
 			stop = 1;
 			break;
 

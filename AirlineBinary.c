@@ -21,6 +21,8 @@ int writeAirlineToBFile(const char* fileName,Airline* airline )
         fclose(fp);
         return 0;
     }
+    if(fwrite(&airline->s_type,sizeof(int),1,fp)!=1)
+        return 0;
     if(fwrite(&airline->flightCount,sizeof(int),1,fp)!=1) {
         fclose(fp);
         return 0;
@@ -54,7 +56,7 @@ int readAirlineFromBFile(const char* fileName,Airline* airline )
         free(airline->name);
         return 0;
     }
-    if(fread(&airline->flightCount,sizeof(int),1,fp)!=1)
+    if(fread(&airline->s_type,sizeof(int),1,fp)!=1)
     {
         fclose(fp);
         free(airline->name);

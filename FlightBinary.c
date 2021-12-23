@@ -14,6 +14,8 @@ int writeFlightToBFile(FILE* fp,Flight* flight )
     if(fwrite(flight->nameDest,sizeof(char),len,fp)!=len)
         return 0;
     len = (int)strlen(flight->nameSource)+1;
+    if(fwrite(&len,sizeof(int),1,fp)!=1)
+        return 0;
     if(fwrite(flight->nameSource,sizeof(char),len,fp)!=len)
         return 0;
     if(writePlaneToBFile(fp,&flight->thePlane)!=1)
@@ -54,10 +56,8 @@ int readFlightFromBFile(FILE* fp,Flight* flight )
 }
 int writeFlightArrToBFile(FILE* fp, Flight** flight, int count)
 {
-    if(fwrite(&count,sizeof(int),1,fp)!=1){
-        return 0;
-    }
-    int i=0;
+
+    int i;
     for(i=0;i<count;i++)
     {
         if(!writeFlightToBFile(fp,flight[i]))

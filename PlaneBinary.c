@@ -5,10 +5,7 @@
 
 int writePlaneToBFile(FILE* fp,Plane* plane )
 {
-    if(fwrite(&plane->type,sizeof(int),1,fp)!=1)
-        return 0;
-    int len = (int)strlen(plane->code);
-    if(fwrite(plane->code,sizeof(char),len,fp)!=len)
+    if(fwrite(plane,sizeof(Plane),1,fp)!=1)
         return 0;
     return 1;
 }

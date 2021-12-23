@@ -3,11 +3,17 @@
 
 #include "Flight.h"
 #include "AirportManager.h"
+typedef enum {
+    sort1, sort2, sort3, sort4
+} eSortType;
 
+
+static const char* sortType[sort4];
 typedef struct
 {
 	char*		name;
 	int			flightCount;
+    eSortType    s_type;
 	Flight**	flightArr;
 }Airline;
 
