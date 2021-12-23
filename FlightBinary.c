@@ -29,22 +29,22 @@ int readFlightFromBFile(FILE* fp,Flight* flight )
     int len;
     if(fread(&len,sizeof(int),1,fp)!=1)
         return 0;
-    flight->nameDest=(char*)malloc(len*sizeof(char));
-    if(!flight->nameDest)
-        return 0;
-    if(fread(flight->nameDest,sizeof(char),len,fp)!=len) {
-        free(flight->nameDest);
-        return 0;
-    }
-
     flight->nameSource=(char*)malloc(len*sizeof(char));
     if(!flight->nameSource)
         return 0;
+    if(fread(flight->nameSource,sizeof(char),len,fp)!=len) {
+        free(flight->nameSource);
+        return 0;
+    }
+
+    flight->nameDest=(char*)malloc(len*sizeof(char));
+    if(!flight->nameDest)
+        return 0;
     if(fread(&len,sizeof(int),1,fp)!=1)
         return 0;
-    if(fread(flight->nameSource,sizeof(char),len,fp)!=len) {
-        free(flight->nameDest);
+    if(fread(flight->nameDest,sizeof(char),len,fp)!=len) {
         free(flight->nameSource);
+        free(flight->nameDest);
         return 0;
     }
     if(readPlaneFromBFile(fp,&flight->thePlane)!=1)

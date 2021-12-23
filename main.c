@@ -3,25 +3,38 @@
 
 #include "Airline.h"
 
-
+#include "Compare.h"
 #include "AirportManagerText.h"
 #include "AirlineBinary.h"
 typedef enum 
 { 
-	eAddFlight, eAddAirport, ePrintCompany, ePrintAirports,
+	eAddFlight, eAddAirport, ePrintCompany,eSortFlights,eSearchFlights,  ePrintAirports,
 	ePrintNumFlightsOrig, ePrintFlightsPlaneCode, ePrintFlightsPlaneType, eNofOptions
 } eMenuOptions;
 
+typedef enum
+{
+    eNameSource,eNameDestination,eDate,eCodePlane,eNof
+}eSortsOptions;
+
 const char* str[eNofOptions] = { "Add Flight", "Add Airport",
-								"Print Airline", "Print all Airports",
+								"Print Airline","Sort Flights","Search Flights", "Print all Airports",
 								"Print number of flights from origin airport name",
 								"Print all flights with plane code",
 								"Print all flights with plane type" };
+
+const char* sorts[eNof] = {"Name Source Sort", "Name Destination Sort", "Date Sort", "Plane Code Sort"};
+const char* search[eNof] = {"Name Source Search","Name Destination Search","Date Search","Plane Code Search"};
+
+
+
 
 #define EXIT			-1
 #define TEXT_FILE "airport_authority.txt"
 #define BIN_FILE "airline.bin"
 int menu();
+int menuSorts();
+int menuSearch();
 
 int main()
 {
@@ -39,7 +52,8 @@ int main()
 
 	int option;
 	int stop = 0;
-	
+    int flag =0;
+    int choose;
 	do
 	{
 		option = menu();
@@ -58,11 +72,59 @@ int main()
 
 		case ePrintCompany:
 			printCompany(&company);
+
 			break;
 
+            case eSortFlights:
+                choose=menuSorts();
+                switch (choose) {
+                    case eNameSource:
+                        sortFlights(&company,compareSourceName);
+
+                        break;
+                    case eNameDestination:
+                        sortFlights(&company,compareDestName);
+                        break;
+                    case eDate:
+                        sortFlights(&company,compareDate);
+                        break;
+                    case eCodePlane:
+                        sortFlights(&company,comparePlaneCode);
+                        break;
+                    default:
+                        printf("Wrong number!");
+                }
+                flag=1;
+                break;
+         case eSearchFlights:
+//                if(flag!=1)
+//                    printf("Please sort array Of Flights");
+//                else{
+//                    choose=menuSorts();
+//                    switch (choose) {
+//                        case eNameSource:
+//                            sortFlights(&company,compareSourceName);
+//
+//                            break;
+//                        case eNameDestination:
+//                            sortFlights(&company,compareDestName);
+//                            break;
+//                        case eDate:
+//                            sortFlights(&company,compareDate);
+//                            break;
+//                        case eCodePlane:
+//                            sortFlights(&company,comparePlaneCode);
+//                            break;
+//                        default:
+//                            printf("Wrong number!");
+//                }
+                break;
 		case ePrintAirports:
-			printAirports(&manager);
+            printAirportManager(&manager);
+
 			break;
+
+
 
 		case ePrintNumFlightsOrig:
 			doCountFlightsFromName(&company);
@@ -107,4 +169,34 @@ int menu()
 	char tav;
 	scanf("%c", &tav);
 	return option;
+}
+
+int menuSorts()
+{
+    int option;
+    printf("\n\n");
+    printf("Please choose one of the following options\n");
+    for(int i = 0 ; i < eNof ; i++)
+        printf("%d - %s\n",i,sorts[i]);
+
+    scanf("%d", &option);
+    //clean buffer
+    char tav;
+    scanf("%c", &tav);
+    return option;
+}
+
+int menuSearch()
+{
+    int option;
+    printf("\n\n");
+    printf("Please choose one of the following options\n");
+    for(int i = 0 ; i < eNof ; i++)
+        printf("%d - %s\n",i,sorts[i]);
+
+    scanf("%d", &option);
+    //clean buffer
+    char tav;
+    scanf("%c", &tav);
+    return option;
 }

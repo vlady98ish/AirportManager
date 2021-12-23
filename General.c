@@ -71,3 +71,13 @@ char**	splitCharsToWords(char* str, int* pCount, int* pTotalLength)
 	*pCount = count;
 	return wordsArray;
 }
+
+void generalArrayFunction(const void* array, int size,int TypeSize,void (*print)(const void* element))
+{
+    int i;
+    for(i=0; i<size; i++) {
+        print((char *) array + (i * TypeSize));
+    }
+}
+
+

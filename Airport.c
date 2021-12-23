@@ -33,10 +33,11 @@ void	initAirportNoName(Airport* pPort)
 	pPort->address = getAddress();
 }
 
-void	printAirport(const Airport* pPort)
+void	printAirport(const void* airport)
 {
-	printf("Airport name:%-20s\t", pPort->name);
-	printf("Airport address: %s\n", pPort->address);
+    Airport* a = (Airport*) airport;
+	printf("Airport name:%-20s\t", a->name);
+	printf("Airport address: %s\n", a->address);
 }
 
 

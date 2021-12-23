@@ -77,15 +77,13 @@ int checkUniqeName(const char* name,const AirportManager* pManager)
 	return 1;
 }
 
-void	printAirports(const AirportManager* pManager)
+void	printAirportManager(const AirportManager* pManager)
 {
 	printf("there are %d airports\n", pManager->airportsCount);
-	for (int i = 0; i < pManager->airportsCount; i++)
-	{
-		printAirport(&pManager->airportsArr[i]);
-		printf("\n");
-	}
+    generalArrayFunction(pManager->airportsArr,pManager->airportsCount,sizeof(Airport),printAirport);
 }
+
+
 
 void	freeManager(AirportManager* pManager)
 {

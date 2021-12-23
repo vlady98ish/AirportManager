@@ -16,7 +16,7 @@ typedef struct
 void	initFlight(Flight* pFlight,const AirportManager* pManager);
 int		isFlightFromSourceName(const Flight* pFlight, const char* nameSource);
 int		isFlightToDestName(const Flight* pFlight, const char* nameDest);
-void	printFlight(const Flight* pFlight);
+void	printFlight(const void* pFlight);
 Airport*	setAiportToFlight(const AirportManager* pManager, const char* msg);
 int		isPlaneCodeInFlight(const Flight* pFlight, const char*  code);
 int		isPlaneTypeInFlight(const Flight* pFlight, ePlaneType type);

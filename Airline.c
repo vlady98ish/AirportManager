@@ -36,8 +36,11 @@ void printCompany(const Airline* pComp)
 {
 	printf("Airline %s\n", pComp->name);
 	printf("Has %d flights\n",pComp->flightCount);
-	printFlightArr(pComp->flightArr, pComp->flightCount);
+
+    generalArrayFunction(pComp->flightArr,pComp->flightCount,sizeof(Flight*),printFlight);
+
 }
+
 
 void	doCountFlightsFromName(const Airline* pComp)
 {
@@ -64,14 +67,6 @@ void	doCountFlightsFromName(const Airline* pComp)
 		printf("There are No ");
 
 	printf("flights from this airport\n");
-}
-
-
-
-void	printFlightArr(Flight** pFlight, int size)
-{
-	for (int i = 0; i < size; i++)
-		printFlight(pFlight[i]);
 }
 
 void	doPrintFlightsWithPlaneCode(const Airline* pComp)
@@ -114,3 +109,10 @@ void	freeCompany(Airline* pComp)
 	free(pComp->flightArr);
 	free(pComp->name);
 }
+
+void sortFlights(Airline* pComp,int(*compare)(const void*a,const void*b))
+{
+    qsort(pComp->flightArr,pComp->flightCount,sizeof(Flight*),compare);
+}
+
+

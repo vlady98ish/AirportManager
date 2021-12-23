@@ -57,11 +57,13 @@ int		isPlaneTypeInFlight(const Flight* pFlight, ePlaneType type)
 }
 
 
-void	printFlight(const Flight* pFlight)
+void	printFlight(const void* pFlight)
 {
-	printf("Flight From %s To %s\t",pFlight->nameSource, pFlight->nameDest);
-	printDate(&pFlight->date);
-	printPlane(&pFlight->thePlane);
+    Flight* flight ;
+    flight=*(Flight**)pFlight;
+	printf("Flight From %s To %s\t",flight->nameSource, flight->nameDest);
+	printDate(&flight->date);
+	printPlane(&flight->thePlane);
 }
 
 Airport* setAiportToFlight(const AirportManager* pManager, const char* msg)
