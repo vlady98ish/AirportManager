@@ -3,6 +3,7 @@
 
 #include "Flight.h"
 #include "AirportManager.h"
+#include "list.h"
 
 typedef enum {
     eSortByNameSource, eSortByNameDest, eSortByDate, eSortByCode, NotSorted
@@ -16,6 +17,7 @@ typedef struct {
     int flightCount;
     eSortType s_type;
     Flight **flightArr;
+    LIST datesList;
 } Airline;
 
 void initAirline(Airline *pComp);
@@ -42,6 +44,8 @@ Flight *searchFlights(Airline *pComp);
 
 eSortType getSortType();
 
+int     addDateToList(LIST* list, Date* date);
 
+void updaterAfterReadingBFile(Airline* airline);
 #endif
 

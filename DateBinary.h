@@ -8,6 +8,6 @@ int writeDateToBFile(FILE *fp, Date *date);
 
 int readDateFromBFile(FILE *fp, Date *date);
 
-void addDateToEndOfBFile(FILE *fp, Date *date);
+
 
 #endif

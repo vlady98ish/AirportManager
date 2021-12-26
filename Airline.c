@@ -7,12 +7,14 @@
 #include "General.h"
 #include "Compare.h"
 
+
 void initAirline(Airline *pComp) {
     printf("-----------  Init Airline Airline\n");
     pComp->name = getStrExactName("Enter Airline name");
 
     pComp->flightArr = NULL;
     pComp->flightCount = 0;
+    L_init(&(pComp->datesList));
 }
 
 int addFlight(Airline *pComp, const AirportManager *pManager) {
@@ -28,7 +30,16 @@ int addFlight(Airline *pComp, const AirportManager *pManager) {
         return 0;
     initFlight(pComp->flightArr[pComp->flightCount], pManager);
     pComp->flightCount++;
+    Date* currentDate = &(pComp->flightArr[pComp->flightCount-1]->date); //TODO we did -1 because in the line before we did flightCount++
+    int check = addDateToList(&(pComp->datesList),currentDate); //TODO add a date to dateList
+    if(check == 0) printf("\nThe date was entered to the list.\n");
+    if(check == 1 ) printf("The date was NOT entered to the list - because ot already exists.\n");
     return 1;
+}
+int     addDateToList(LIST* list, Date* date)
+{
+    int check = L_insertInCorrectPlace(&(list->head),date, compareDates);
+    return check;
 }
 
 void printCompany(const Airline *pComp) {
@@ -36,6 +47,8 @@ void printCompany(const Airline *pComp) {
     printf("Has %d flights\n", pComp->flightCount);
 
     generalArrayFunction(pComp->flightArr, pComp->flightCount, sizeof(Flight *), printFlight);
+
+    L_print(&(pComp->datesList), printDate);
 
 }
 
@@ -96,6 +109,7 @@ void freeCompany(Airline *pComp) {
     freeFlightArr(pComp->flightArr, pComp->flightCount);
     free(pComp->flightArr);
     free(pComp->name);
+    L_free(&pComp->datesList, free);
 }
 
 void sortFlights(Airline *pComp) {
@@ -159,6 +173,20 @@ eSortType getSortType() {
     } while (option < 0 || option >= NotSorted);
     getchar();
     return (eSortType) option;
+}
+
+
+void updaterAfterReadingBFile(Airline* airline)
+{
+    L_init(&(airline->datesList));
+    int i;
+    for(i=0;i<airline->flightCount;i++)
+    {
+        Date* currentDate = &(airline->flightArr[i]->date); //TODO we did -1 because in the line before we did flightCount++
+        int check = addDateToList(&(airline->datesList),currentDate); //TODO add a date to dateList
+        if(check == 0) printf("\nThe date was entered to the list.\n");
+        if(check == 1 ) printf("The date was NOT entered to the list - because ot already exists.\n");
+    }
 }
 
 

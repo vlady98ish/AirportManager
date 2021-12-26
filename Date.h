@@ -13,6 +13,13 @@ void getCorrectDate(Date *pDate);
 
 int checkDate(char *date, Date *pDate);
 
-void printDate(const Date *pDate);
+void printDate(void *pDate);
+
+
+
+int makeIntFromDate(Date *date); //TODO function for formating date to INTEGER
+int compareDates(const void *newDateVoid, const void *existDateVoid);
+
+
 
 #endif

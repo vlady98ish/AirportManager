@@ -5,7 +5,6 @@
 #include "DateBinary.h"
 
 
-
 int writeFlightToBFile(FILE *fp, Flight *flight) {
     int len = (int) strlen(flight->nameDest) + 1;
     if (fwrite(&len, sizeof(int), 1, fp) != 1)

@@ -33,6 +33,9 @@ int main() {
     Airline company;
     if (readAirportManagerFromTextFile(TEXT_FILE, &manager) == 1) {
         readAirlineFromBFile(BIN_FILE, &company);
+
+        updaterAfterReadingBFile(&company);
+
     } else {
         initManager(&manager);
         initAirline(&company);
@@ -101,7 +104,7 @@ int main() {
     } while (!stop);
 
     freeManager(&manager);
-    //freeCompany(&company);
+    freeCompany(&company);
     return 1;
 }
 
