@@ -8,7 +8,7 @@
 
 int writeAirlineToBFile(const char *fileName, Airline *airline) {
     FILE *fp;
-    fp = fopen("C:\\Users\\joker\\CLionProjects\\HW_3\\airline.bin", "wb");
+    fp = fopen(fileName, "wb");
     if (!fp)
         return 0;
     int len = (int) strlen(airline->name) + 1;
@@ -31,12 +31,13 @@ int writeAirlineToBFile(const char *fileName, Airline *airline) {
 
         return 0;
     }
+    fclose(fp);
     return 1;
 }
 
 int readAirlineFromBFile(const char *fileName, Airline *airline) {
     FILE *fp;
-    fp = fopen("C:\\Users\\joker\\CLionProjects\\HW_3\\airline.bin", "rb");
+    fp = fopen(fileName, "rb");
     if (!fp)
         return 0;
     int len;

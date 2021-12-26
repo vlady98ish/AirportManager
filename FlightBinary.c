@@ -25,9 +25,10 @@ int writeFlightToBFile(FILE *fp, Flight *flight) {
 
 int readFlightFromBFile(FILE *fp, Flight *flight) {
     int len;
+    int len1;
     if (fread(&len, sizeof(int), 1, fp) != 1)
         return 0;
-    flight->nameSource = (char *) malloc(len * sizeof(char));
+    flight->nameSource = (char *) calloc(len, sizeof(char));
     if (!flight->nameSource)
         return 0;
     if (fread(flight->nameSource, sizeof(char), len, fp) != len) {
@@ -35,12 +36,13 @@ int readFlightFromBFile(FILE *fp, Flight *flight) {
         return 0;
     }
 
-    flight->nameDest = (char *) malloc(len * sizeof(char));
+    if (fread(&len1, sizeof(int), 1, fp) != 1)
+        return 0;
+    flight->nameDest = (char *) calloc(len1, sizeof(char));
     if (!flight->nameDest)
         return 0;
-    if (fread(&len, sizeof(int), 1, fp) != 1)
-        return 0;
-    if (fread(flight->nameDest, sizeof(char), len, fp) != len) {
+
+    if (fread(flight->nameDest, sizeof(char), len1, fp) != len1) {
         free(flight->nameSource);
         free(flight->nameDest);
         return 0;

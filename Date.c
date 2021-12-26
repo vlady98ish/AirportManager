@@ -45,26 +45,26 @@ int checkDate(char *date, Date *pDate) {
 }
 
 void printDate(void *pDate) {
-    Date*temp = (Date*)pDate;
+    Date *temp = (Date *) pDate;
     printf("Date: %d/%d/%d\n", temp->day, temp->month, temp->year);
 }
 
 int makeIntFromDate(Date *date) //TODO format a date to unique INTEGER
 {
-    int returnDate = ((date->year) * 10000)+((date->month) * 100)+(date->day);
+    int returnDate = ((date->year) * 10000) + ((date->month) * 100) + (date->day);
     return returnDate;
 }
 
-int compareDates(const void* newDateVoid, const void* existDateVoid) //TODO function for comparing dates
+int compareDates(const void *newDateVoid, const void *existDateVoid) //TODO function for comparing dates
 {
-    Date* newDate = (Date*)newDateVoid;
-    Date* existDate = (Date*)existDateVoid;
+    Date *newDate = (Date *) newDateVoid;
+    Date *existDate = (Date *) existDateVoid;
 
     int intNewDate = makeIntFromDate(newDate);
     int intExistDate = makeIntFromDate(existDate);
 
-    if( intNewDate < intExistDate ) return -1;
-    else if( intNewDate > intExistDate ) return 1;
+    if (intNewDate < intExistDate) return -1;
+    else if (intNewDate > intExistDate) return 1;
 
     return 0;
 

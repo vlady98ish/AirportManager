@@ -8,7 +8,7 @@
 
 int writeAirportManagerToTextFile(const char *fileName, AirportManager *airportManager) {
     FILE *fp;
-    fp = fopen("C:\\Users\\joker\\CLionProjects\\HW_3\\airport_authority.txt", "w");
+    fp = fopen(fileName, "w");
     if (!fp) {
 
         return 0;
@@ -23,7 +23,7 @@ int writeAirportManagerToTextFile(const char *fileName, AirportManager *airportM
 
 int readAirportManagerFromTextFile(const char *fileName, AirportManager *airportManager) {
     FILE *fp;
-    fopen_s(&fp, "C:\\Users\\joker\\CLionProjects\\HW_3\\airport_authority.txt", "r");
+    fopen_s(&fp, fileName, "r");
     if (!fp) {
 
         return 0;

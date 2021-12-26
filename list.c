@@ -69,8 +69,8 @@ BOOL L_delete(NODE *pNode, void (*freeFunc)(void *)) {
 
     pNode->next = tmp->next;
     if (freeFunc != NULL)
-        freeFunc(tmp->key);
-    free(tmp);
+        free(tmp);
+
     return True;
 }
 
@@ -109,7 +109,7 @@ BOOL L_free(LIST *pList, void (*freeFunc)(void *)) { //TODO do not forget to add
     NODE *tmp;
 
     if (!pList) return False;
-    tmp = &(pList->head);
+    tmp = &pList->head;
     BOOL res = True;
     while (res) {
         res = L_delete(tmp, freeFunc);
@@ -137,29 +137,5 @@ int L_print(const LIST *pList, void(*print)(void *)) {
     printf("\n");
     return c;
 }
-
-
-//void L_insert_by_order(NODE* head, DATA Value)
-//{
-//    NODE* p = head;
-//    int result;
-//
-//    if(p->next==NULL)
-//    {
-//        L_insert(p,Value);
-//        return;
-//    }
-//    while (p->next != NULL){
-//        result= dateCompare(Value,p->next->key);
-//        if(result== -1){
-//            L_insert(p,Value);
-//            return;
-//        }
-//        p=p->next;
-//    }
-//    result = dateCompare(Value,p->key);
-//    if(result==1)
-//        L_insert(p,Value);
-//}
 
 

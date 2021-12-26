@@ -92,8 +92,10 @@ int main() {
 
             case EXIT:
                 printf("Bye bye\n");
-                writeAirportManagerToTextFile("", &manager);
-                writeAirlineToBFile("", &company);
+                writeAirportManagerToTextFile(TEXT_FILE, &manager);
+                writeAirlineToBFile(BIN_FILE, &company);
+                freeManager(&manager);
+                freeCompany(&company);
                 stop = 1;
                 break;
 
@@ -103,8 +105,7 @@ int main() {
         }
     } while (!stop);
 
-    freeManager(&manager);
-    freeCompany(&company);
+
     return 1;
 }
 

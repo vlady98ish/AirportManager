@@ -106,10 +106,11 @@ void freeFlightArr(Flight **arr, int size) {
 }
 
 void freeCompany(Airline *pComp) {
+    L_free(&pComp->datesList, free);
     freeFlightArr(pComp->flightArr, pComp->flightCount);
     free(pComp->flightArr);
     free(pComp->name);
-    L_free(&pComp->datesList, free);
+
 }
 
 void sortFlights(Airline *pComp) {
